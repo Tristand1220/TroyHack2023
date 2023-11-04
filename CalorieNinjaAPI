@@ -31,7 +31,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Calorie Counter");
+		primaryStage.setTitle("NutriTrack");
 
 		inputField = new TextField();
 		Button submitButton = new Button("Submit");
