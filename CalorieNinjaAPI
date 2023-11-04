@@ -1,0 +1,46 @@
+package com.example.nutritrack;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		String query = "15lb ground beef";
+		String apiKey = "gCinFKoQRCFup6+mo0i+ig==7PHh1I04OqvakcH7";
+
+		try {
+			// URL-encode the query string
+			String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
+
+			String apiUrl = "https://api.calorieninjas.com/v1/nutrition?query=" + encodedQuery;
+
+			HttpClient httpClient = HttpClients.createDefault();
+			HttpGet request = new HttpGet(apiUrl);
+			request.addHeader("X-Api-Key", apiKey);
+
+			HttpResponse response = httpClient.execute(request);
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			StringBuilder result = new StringBuilder();
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				result.append(line);
+			}
+
+			System.out.println("API Response: " + result.toString()+"\n");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
