@@ -1,0 +1,121 @@
+package com.example.demo;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class searchController {
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    @FXML
+    private TextField textField1;
+    @FXML
+    private DatePicker dateSelect;
+
+
+    public void swapToBMR(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("FindBMRscreen.fxml"));
+        stage= (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void swapToDisplay(ActionEvent e) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("DisplayScreen.fxml"));
+        stage= (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public void retrievText(ActionEvent a){
+        String food= textField1.getText();
+        System.out.println(food);
+
+    }
+
+    public void getDate(ActionEvent a){
+        String date= String.valueOf(dateSelect.getValue());
+        System.out.println(date);
+    }
+
+
+
+
+}
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.searchController">
+    <children>
+        <AnchorPane layoutY="-5.0" prefHeight="97.0" prefWidth="335.0" style="-fx-background-color: #020200;">
+            <children>
+                <Text id="search" fill="WHITE" layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" wrappingWidth="111.31638526916504">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <TextField id="search" fx:id="textField1" layoutX="85.0" layoutY="34.0" />
+                <Button id="enterButton" fx:id="enterButton" layoutX="243.0" layoutY="32.0" mnemonicParsing="false" onAction="#retrievText" prefHeight="33.0" prefWidth="61.0" style="-fx-border-color: #fffff6; -fx-text-fill: #ffffff; -fx-background-color: #020200;" text="Enter">
+                    <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="1.0" green="1.0" blue="1.0" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </LinearGradient>
+                    </textFill>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Line endX="234.00003051757812" endY="-3.0517578125E-5" layoutX="101.0" layoutY="505.0" startX="-101.0" startY="-3.0517578125E-5" />
+        <Button layoutX="197.0" layoutY="537.0" mnemonicParsing="false" onAction="#swapToBMR" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: #f7ff48; -fx-text-fill: #020200;" text="Find BMR" textFill="#312b2b" />
+        <Button layoutX="44.0" layoutY="537.0" mnemonicParsing="false" onAction="#swapToDisplay" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: #f7ff48; -fx-text-fill: #020200;" text="Display" />
+        <ScrollPane id="resultArea" layoutX="37.0" layoutY="171.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <TextArea prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <DatePicker fx:id="dateSelect" layoutX="54.0" layoutY="92.0" onAction="#getDate" prefHeight="25.0" prefWidth="213.0" promptText="Enter a Date" />
+    </children>
+</AnchorPane>
+
