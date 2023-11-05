@@ -20,9 +20,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Main extends Application {
+public class search extends Application {
 
-	private TextField inputField;
+	private TextField search;
 	private TextArea resultArea;
 
 	public static void main(String[] args) {
@@ -33,23 +33,23 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("NutriTrack");
 
-		inputField = new TextField();
-		Button submitButton = new Button("Submit");
+		search = new TextField();
+		Button enterButton = new Button("Enter");
 		resultArea = new TextArea();
 		resultArea.setWrapText(true);
 
-		submitButton.setOnAction(e -> {
-			String query = inputField.getText(); // Get user input from the text field
+		enterButton.setOnAction(e -> {
+			String query = search.getText(); // Get user input from the text field
 			try {
 				String apiResponse = makeAPICall(query);
 				resultArea.setText(apiResponse);
 			} catch (IOException ex) {
-				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(search.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		});
 
 		VBox layout = new VBox(10);
-		layout.getChildren().addAll(inputField, submitButton, resultArea);
+		layout.getChildren().addAll(search, enterButton, resultArea);
 
 		Scene scene = new Scene(layout, 400, 300);
 		primaryStage.setScene(scene);
