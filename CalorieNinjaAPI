@@ -73,9 +73,15 @@ public class Main extends Application {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 		StringBuilder result = new StringBuilder();
 		String line;
+		int charactersCount = 0;
 
 		while ((line = reader.readLine()) != null) {
-			result.append(line).append("\n");
+			if (charactersCount + line.length() <= 400) { // Limit the display to the first 500 characters
+				result.append(line).append("\n");
+				charactersCount += line.length();
+			} else {
+				break; // Stop reading once the character limit is reached
+			}
 		}
 
 		return result.toString();
