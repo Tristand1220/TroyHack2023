@@ -1,25 +1,35 @@
-import java.io.*;
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class calorieLog {
-    public static void main(String args[])
-        {
-            // No need to mention the
-            // Generic type twice
-            Hashtable<String, Integer> calLog = new Hashtable<>();
+    private Map<String, Integer>  calorieData;
 
-
-            // Inserting the Elements
-            calLog.put("oct2", 1000);
-            calLog.put("nov1", 1570);
-            calLog.put("nov3", 2050);
-
-
-
-            // Print mappings to the console
-            System.out.println("Mappings of ht1 : " + calLog );
-
-        }
+    public calorieLog() {
+        calorieData = new TreeMap<>();
     }
 
+    // Add or update a calorie entry for a specific date
+    public void addCalories(String date, int calories) {
+        calorieData.put(date, calories);
+    }
 
+    // Remove a calorie entry for a specific date
+    public void removeCalories(String date) {
+        calorieData.remove(date);
+    }
+
+    // Retrieve the calorie count for a specific date
+    public int getCalories(String date) {
+        Integer calories = calorieData.get(date);
+        return (calories != null) ? calories : 0;
+    }
+
+    // Print all calorie entries
+    public void printCalories() {
+        System.out.println("Calorie Entries:");
+        for (String date : calorieData.keySet()) {
+            int calories = calorieData.get(date);
+            System.out.println(date + ": " + calories + " calories");
+        }
+    }
+}
