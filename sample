@@ -1,10 +1,13 @@
 package com.example.demo;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,6 +16,11 @@ public class searchController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    private TextField textField1;
+    @FXML
+    private DatePicker dateSelect;
 
 
     public void swapToBMR(ActionEvent e) throws IOException {
@@ -30,8 +38,19 @@ public class searchController {
         stage.show();
 
     }
-    
-    
 
-    
+    public void retrievText(ActionEvent a){
+        String food= textField1.getText();
+        System.out.println(food);
+
+    }
+
+    public void getDate(ActionEvent a){
+        String date= String.valueOf(dateSelect.getValue());
+        System.out.println(date);
+    }
+
+
+
+
 }
