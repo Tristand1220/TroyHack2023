@@ -16,25 +16,42 @@ public class calculateDefOrSur {
 
         int daysBetween = period.getDays();
 
-        totalCals= totalCals + tracker.getCalories(startDate);
-        totalCals= totalCals + tracker.getCalories(endDate);
+        day beginDay= tracker.getDay(startDate);
+        day endDay= tracker.getDay(endDate);
+
+        totalCals= totalCals + beginDay.getCalories();
+        totalCals= totalCals + endDay.getCalories();
+
+        startDateComponents[2]= startDateComponents[2]+1;
+        String searchDateString = String.format("%04d-%02d-%02d", startDateComponents[0], startDateComponents[1], startDateComponents[2]);
+        day iteratorDay= tracker.getDay(searchDateString);
 
         for(int i=1;i<daysBetween;i++){
 
-            String searchDateString = String.format("%04d-%02d-%02d", startDateComponents[0], startDateComponents[1], startDateComponents[2]);
+            startDateComponents[2]= startDateComponents[2]+1;
+            iteratorDay= tracker.getDay(searchDateString);
 
+            searchDateString = String.format("%04d-%02d-%02d", startDateComponents[0], startDateComponents[1], startDateComponents[2]);
             int[] daysOfMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
             if (startDateComponents[1] > daysOfMonth[startDateComponents[2]]) {
                 startDateComponents[2] = startDateComponents[2] + 1;
                 startDateComponents[1] = 1;
                 searchDateString = String.format("%04d-%02d-%02d", startDateComponents[0], startDateComponents[1], startDateComponents[2]);
             }
-            totalCals+=tracker.getCalories(searchDateString);
-            startDateComponents[1]= startDateComponents[1]+1;
+
+            totalCals+=iteratorDay.getCalories();
+
         }
 
+        System.out.println("days between " + daysBetween);
+        System.out.println("iterator day cal count "+ iteratorDay.getCalories());
+        System.out.println("total cals "+ totalCals);
+
+
         double CalsBasedBMR=(1+ daysBetween) * BMR;
+        System.out.println("Cals based BMR " +CalsBasedBMR);
         difference= totalCals-CalsBasedBMR;
+
 
     }
 

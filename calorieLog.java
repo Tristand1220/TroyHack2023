@@ -1,35 +1,25 @@
-import java.util.Map;
 import java.util.TreeMap;
 
 public class calorieLog {
-    private Map<String, Integer>  calorieData;
+    private TreeMap<String, day> dataStore;
 
     public calorieLog() {
-        calorieData = new TreeMap<>();
+        dataStore = new TreeMap<>();
     }
 
-    // Add or update a calorie entry for a specific date
-    public void addCalories(String date, int calories) {
-        calorieData.put(date, calories);
+    public void addDay(day Day) {
+        dataStore.put(Day.getDate(), Day);
     }
 
-    // Remove a calorie entry for a specific date
-    public void removeCalories(String date) {
-        calorieData.remove(date);
+    public day getDay(String date) {
+        return dataStore.get(date);
     }
 
-    // Retrieve the calorie count for a specific date
-    public int getCalories(String date) {
-        Integer calories = calorieData.get(date);
-        return (calories != null) ? calories : 0;
+    public void removeDay(String date) {
+        dataStore.remove(date);
     }
 
-    // Print all calorie entries
-    public void printCalories() {
-        System.out.println("Calorie Entries:");
-        for (String date : calorieData.keySet()) {
-            int calories = calorieData.get(date);
-            System.out.println(date + ": " + calories + " calories");
-        }
+    public boolean containsDay(String date) {
+        return dataStore.containsKey(date);
     }
 }
